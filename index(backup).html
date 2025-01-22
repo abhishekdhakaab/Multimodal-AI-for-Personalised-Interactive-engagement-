@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video to Audio Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;  // This will not hide the image if the image is loaded correctly
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            background-image: url('/static/background.jpg'); /* Updated path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    
+        h1 {
+            margin-bottom: 20px;
+        }
+    
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+    
+        audio {
+            margin-top: 20px;
+            display: none;
+        }
+    
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Video to Audio Converter</h1>
+    <input type="file" id="videoInput" accept="video/*">
+    <button onclick="uploadFile()">Upload Video</button>
+    <audio id="audioOutput" controls></audio>
+    <div class="result"></div>
+
+    <script>
+        function uploadFile() {
+            const videoInput = document.getElementById('videoInput');
+            const audioOutput = document.getElementById('audioOutput');
+            const formData = new FormData();
+            const file = videoInput.files[0];
+
+            if (file) {
+                formData.append('video', file);
+
+                // Post the form data to the server
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                }).then(response => response.blob())
+                  .then(blob => {
+                    const audioSrc = URL.createObjectURL(blob);
+                    audioOutput.src = audioSrc;
+                    audioOutput.style.display = 'block'; // Show the audio player
+                    audioOutput.play();
+                }).catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+</body>
+</html>
