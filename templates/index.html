@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video to Audio Converter</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;  
+            color: #333;
+            display : flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            background-image: url('/static/background.jpg'); /* Updated path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    
+        h1 {
+            margin-bottom: 20px;
+        }
+    
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+    
+        audio {
+            margin-top: 20px;
+            display: none;
+        }
+    
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Personal Multimodal AI</h1>
+    <video id="videoElement" width="720" height="480" autoplay></video>
+    <button id="startRecording">Start Recording</button>
+    <button id="stopRecording" disabled>Stop Recording</button>
+    <div id="waveform" style="width: 100%; height: 100px;"></div> <!-- Waveform container -->
+    <audio id="audioOutput" controls style="display: none;"></audio>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
